@@ -7,9 +7,9 @@ doc = docx.Document('lion.docx') # открытие дока
 num_par = len(doc.paragraphs) # количество абзацев
 word_list = [] # список слов без повторений 
 a = [] 
-rus_let = re.compile(r'[а-яё]', re.IGNORECASE) # ✨регулярное выражение✨ или типа того, игнорирующее заглавные буквы
+rus_let = re.compile(r'[а-яё]', re.IGNORECASE) # регулярное выражение или типа того, игнорирующее заглавные буквы
 rus_text = [] # список для всего текста
-rus_word = re.compile(r'\b[а-яё]+\b',re.IGNORECASE) # ✨регулярное выражение✨ или типа того 
+rus_word = re.compile(r'\b[а-яё]+\b',re.IGNORECASE) # регулярное выражение или типа того 
 for paragraph in doc.paragraphs: # для каждого абзаца из абзацев...
     text = paragraph.text.lower() # весь текст в нижний регистр
     words = rus_word.findall(text) # находим русские слова и добавляем в список
