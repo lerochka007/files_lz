@@ -3,7 +3,6 @@ from collections import Counter # всем было лень считать че
 import re # для работы с текстом 
 import pandas as pd 
 import matplotlib.pyplot as plt # для графика
-
 doc = docx.Document('lion.docx') # открытие дока
 num_par = len(doc.paragraphs) # количество абзацев
 word_list = [] # список слов без повторений 
@@ -31,20 +30,17 @@ dict_word = {
 df_word = pd.DataFrame(dict_word)
 doc_word = docx.Document() # новый док
 doc_word.add_heading('Встречаемость слов в тексте', 0) # заголовок для приличия
-
 table = doc_word.add_table(rows=1, cols=3) # таблица с одной строкой и тремя колонками 
 hdr_cells = table.rows[0].cells # cells - используем для доступа к конкретным ячейкам строки, чтобы заполнить их содержимым
 hdr_cells[0].text = 'Слово' 
 hdr_cells[1].text = 'Частота встречи,раз'
 hdr_cells[2].text = 'Частота встречи в %'
-
 for i in range(len(df_word)):
     row_cells = table.add_row().cells # новые строки в таблицу                                        
     row_cells[0].text = df_word.loc[i, 'Слово'] # loc - выбор строки с индексом [i]
     row_cells[1].text = str(df_word.loc[i, 'Частота встречи,раз'])
     row_cells[2].text = str(df_word.loc[i, 'Частота встречи в %'])
 doc_word.save('Встречаемость_слов.docx') # сохранение дока
-
 letters_counts = Counter(a) #частота встречаемости букв (тоже на ленивом)
 df_letter = pd.DataFrame(letters_counts.items(),columns=['Буквы','Количество'])
 df_letter['Количество'] = pd.to_numeric(df_letter['Количество']) # преобразования значений в столбцах в числовой тип данных
